@@ -66,21 +66,27 @@ public class CustomersActivity extends AppCompatActivity {
 
         button_update.setOnClickListener(
                 v -> {
-                    Intent intent = new Intent(CustomersActivity.this, CustomerActivity.class);
-                    intent.putExtra("userId", userId);
-                    TextView textView = (TextView) selectedRow.getChildAt(2);
-                    intent.putExtra("id", Integer.valueOf(textView.getText().toString()));
-                    startActivity(intent);
+                    if(selectedRow != null) {
+                        Intent intent = new Intent(CustomersActivity.this, CustomerActivity.class);
+                        intent.putExtra("userId", userId);
+                        TextView textView = (TextView) selectedRow.getChildAt(2);
+                        intent.putExtra("id", Integer.valueOf(textView.getText().toString()));
+                        startActivity(intent);
+                        selectedRow = null;
+                    }
                 }
         );
 
         button_delete.setOnClickListener(
                 v -> {
-                    logic.open();
-                    TextView textView = (TextView) selectedRow.getChildAt(2);
-                    logic.delete(Integer.parseInt(textView.getText().toString()));
-                    fillTable(Arrays.asList("Имя", "Дата рождения"), logic.getFilteredList(userId));
-                    logic.close();
+                    if(selectedRow != null){
+                        logic.open();
+                        TextView textView = (TextView) selectedRow.getChildAt(2);
+                        logic.delete(Integer.parseInt(textView.getText().toString()));
+                        fillTable(Arrays.asList("Имя", "Дата рождения"), logic.getFilteredList(userId));
+                        logic.close();
+                        selectedRow = null;
+                    }
                 });
         }
 

@@ -6,7 +6,7 @@ import android.content.Context;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "budteBolnyDatabase.db"; // название бд
+    private static final String DATABASE_NAME = "budteBolny.db"; // название бд
     private static final int SCHEMA = 1; // версия базы данных
 
     public DatabaseHelper(Context context) {

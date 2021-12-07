@@ -18,4 +18,6 @@
     <string name="text_view_medicine_name">Название: </string>
     <string name="text_view_type">Тип: </string>
     <string name="text_view_price">Цена за упаковку: </string>
+    <string name="button_discharge_date">Установить дату назначения</string>
+    <string name="button_receiving_date">Установить дату получения</string>
 </resources>

@@ -3,6 +3,8 @@ package com.example.coursework.database.models;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class ReceiptModel {
@@ -10,13 +12,13 @@ public class ReceiptModel {
     private long receiving_date;
     private long discharge_date;
     private int customerId;
-    private Map<Integer, Integer> receiptMedicines = new HashMap<Integer, Integer>();
+    private List<ReceiptMedicinesModel> receiptMedicines = new LinkedList<>();
 
-    ReceiptModel(){
+    public ReceiptModel(){
 
     }
 
-    ReceiptModel(long receiving_date, long discharge_date, int customerId, Map<Integer, Integer> receiptMedicines){
+    public ReceiptModel(long receiving_date, long discharge_date, int customerId, List<ReceiptMedicinesModel> receiptMedicines){
         this.receiving_date = receiving_date;
         this.discharge_date = discharge_date;
         this.customerId = customerId;
@@ -55,11 +57,11 @@ public class ReceiptModel {
         this.customerId = customerId;
     }
 
-    public Map<Integer, Integer> getReceiptMedicines() {
+    public List<ReceiptMedicinesModel> getReceiptMedicines() {
         return receiptMedicines;
     }
 
-    public void setReceiptMedicines(Map<Integer, Integer> receiptMedicines) {
+    public void setReceiptMedicines(List<ReceiptMedicinesModel> receiptMedicines) {
         this.receiptMedicines = receiptMedicines;
     }
 }

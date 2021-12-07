@@ -59,20 +59,26 @@ public class MedicinesActivity extends AppCompatActivity {
 
         button_update.setOnClickListener(
                 v -> {
-                    Intent intent = new Intent(MedicinesActivity.this, MedicineActivity.class);
-                    TextView textView = (TextView) selectedRow.getChildAt(3);
-                    intent.putExtra("id", Integer.valueOf(textView.getText().toString()));
-                    startActivity(intent);
+                    if(selectedRow != null) {
+                        Intent intent = new Intent(MedicinesActivity.this, MedicineActivity.class);
+                        TextView textView = (TextView) selectedRow.getChildAt(3);
+                        intent.putExtra("id", Integer.valueOf(textView.getText().toString()));
+                        startActivity(intent);
+                        selectedRow = null;
+                    }
                 }
         );
 
         button_delete.setOnClickListener(
                 v -> {
-                    logic.open();
-                    TextView textView = (TextView) selectedRow.getChildAt(3);
-                    logic.delete(Integer.valueOf(textView.getText().toString()));
-                    fillTable(Arrays.asList("Название", "Тип", "Стоимость за упаковку"), logic.getFullList());
-                    logic.close();
+                    if(selectedRow != null) {
+                        logic.open();
+                        TextView textView = (TextView) selectedRow.getChildAt(3);
+                        logic.delete(Integer.valueOf(textView.getText().toString()));
+                        fillTable(Arrays.asList("Название", "Тип", "Стоимость за упаковку"), logic.getFullList());
+                        logic.close();
+                        selectedRow = null;
+                    }
                 }
         );
 

@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button button_customers;
     Button button_medicines;
+    Button button_receipts;
 
     Button button_exit;
 
@@ -25,11 +26,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         userLogic.open();
 
+        button_receipts = findViewById(R.id.button_receipts);
         button_medicines = findViewById(R.id.button_medicines);
         button_customers = findViewById(R.id.button_customers);
         button_exit = findViewById(R.id.button_exit);
 
         int userId = getIntent().getExtras().getInt("userId");
+
+        button_receipts.setOnClickListener(
+                v -> {
+                    Intent intent = new Intent(MainActivity.this, ReceiptsActivity.class);
+                    startActivity(intent);
+                }
+        );
 
         button_medicines.setOnClickListener(
                 v -> {
