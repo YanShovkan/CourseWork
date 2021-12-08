@@ -72,7 +72,7 @@ public class CustomerActivity extends AppCompatActivity {
         );
 
         button_cancel.setOnClickListener(
-                v -> finish()
+                v -> this.finish()
         );
     }
 }

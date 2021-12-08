@@ -6,13 +6,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.coursework.database.DatabaseHelper;
+import com.example.coursework.database.models.CustomerModel;
 import com.example.coursework.database.models.UserModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserLogic {
-
+    Context context;
     DatabaseHelper sqlHelper;
     SQLiteDatabase db;
     final String TABLE = "user";
@@ -21,6 +22,7 @@ public class UserLogic {
     final String COLUMN_PASSWORD = "password";
 
     public UserLogic(Context context) {
+        this.context = context;
         sqlHelper = new DatabaseHelper(context);
         db = sqlHelper.getWritableDatabase();
     }
@@ -84,5 +86,7 @@ public class UserLogic {
     public void delete(UserModel model) {
         String where = COLUMN_ID+" = "+model.getId();
         db.delete(TABLE,where,null);
+        CustomerLogic customerLogic = new CustomerLogic(context);
+        customerLogic.deleteByUserId(model.getId());
     }
 }

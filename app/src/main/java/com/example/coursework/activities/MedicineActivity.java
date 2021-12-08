@@ -70,7 +70,7 @@ public class MedicineActivity extends AppCompatActivity {
 
         button_cancel.setOnClickListener(
                 v -> {
-                    finish();
+                    this.finish();
                 }
         );
     }

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerLogic {
+    Context context;
     DatabaseHelper sqlHelper;
     SQLiteDatabase db;
     final String TABLE = "customer";
@@ -22,6 +23,7 @@ public class CustomerLogic {
     final String COLUMN_USERID = "userid";
 
     public CustomerLogic(Context context) {
+        this.context = context;
         sqlHelper = new DatabaseHelper(context);
         db = sqlHelper.getWritableDatabase();
     }
@@ -110,5 +112,12 @@ public class CustomerLogic {
     public void delete(int id) {
         String where = COLUMN_ID+" = "+id;
         db.delete(TABLE,where,null);
+        ReceiptLogic receiptLogic = new ReceiptLogic(context);
+        receiptLogic.deleteByCustomerId(id);
     }
+    public void deleteByUserId(int userId) {
+        String where = COLUMN_USERID+" = "+userId;
+        db.delete(TABLE,where,null);
+    }
+
 }
