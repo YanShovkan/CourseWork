@@ -56,7 +56,6 @@ public class ReceiptActivity extends AppCompatActivity {
 
     List<ReceiptMedicinesModel> receiptMedicines = new ArrayList<>();
 
-    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,12 +64,9 @@ public class ReceiptActivity extends AppCompatActivity {
 
         logic = new ReceiptLogic(this);
 
-        ReceiptModel receipt = new ReceiptModel();
-
         int id = getIntent().getExtras().getInt("id");
 
         if(id != 0){
-            receipt = logic.getElement(id);
             ReceiptMedicinesLogic receiptMedicinesLogic = new ReceiptMedicinesLogic(this);
             receiptMedicines = receiptMedicinesLogic.getFilteredList(id);
         }

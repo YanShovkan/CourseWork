@@ -8,14 +8,17 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.coursework.R;
+import com.example.coursework.Report;
 import com.example.coursework.database.logics.UserLogic;
+
+import java.io.FileNotFoundException;
 
 public class MainActivity extends AppCompatActivity {
 
     Button button_customers;
     Button button_medicines;
     Button button_receipts;
-
+    Button button_report;
     Button button_exit;
 
     @Override
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         button_receipts = findViewById(R.id.button_receipts);
         button_medicines = findViewById(R.id.button_medicines);
         button_customers = findViewById(R.id.button_customers);
+        button_report = findViewById(R.id.button_report);
         button_exit = findViewById(R.id.button_exit);
 
         int userId = getIntent().getExtras().getInt("userId");
@@ -62,5 +66,17 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
         );
+
+        button_report.setOnClickListener(
+                v -> {
+                    Report report = new Report();
+                    try {
+                        report.generatePdf();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+        );
     }
+
 }
