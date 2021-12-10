@@ -62,6 +62,31 @@ public class ReceiptLogic {
         return list;
     }
 
+    public List<ReceiptModel> getFilteredList(long dateFrom, long dateTo) {
+        Cursor cursor = db.rawQuery("select * from " + TABLE + " where "
+                + COLUMN_RECEIVING_DATE + " > " + dateFrom + " and " + COLUMN_RECEIVING_DATE + " < " + dateTo, null);
+        List<ReceiptModel> list = new ArrayList<>();
+        if (!cursor.moveToFirst()) {
+            return list;
+        }
+        do {
+            ReceiptModel obj = new ReceiptModel();
+            int id = cursor.getInt((int) cursor.getColumnIndex(COLUMN_ID));
+            obj.setId(id);
+            obj.setReceiving_date(cursor.getLong((int) cursor.getColumnIndex(COLUMN_RECEIVING_DATE)));
+            obj.setDischarge_date(cursor.getLong((int) cursor.getColumnIndex(COLUMN_DISHARGE_DATE)));
+            obj.setCustomerId(cursor.getInt((int) cursor.getColumnIndex(COLUMN_CUSTOMER_ID)));
+
+            ReceiptMedicinesLogic receiptMedicinesLogic = new ReceiptMedicinesLogic(context);
+            receiptMedicinesLogic.open();
+            obj.setReceiptMedicines(receiptMedicinesLogic.getFilteredList(id));
+            receiptMedicinesLogic.close();
+            list.add(obj);
+            cursor.moveToNext();
+        } while (!cursor.isAfterLast());
+        return list;
+    }
+
     public ReceiptModel getElement(int id) {
         Cursor cursor = db.rawQuery("select * from " + TABLE + " where "
                 + COLUMN_ID + " = " + id, null);

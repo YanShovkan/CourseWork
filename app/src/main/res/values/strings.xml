@@ -3,7 +3,7 @@
     <string name="button_customers_text">Покупатели</string>
     <string name="button_medicine_text">Лекарства</string>
     <string name="button_exit_text">Выйти из личного кабинета</string>
-    <string name="button_report_text">Получить отчет</string>
+    <string name="button_report_text">Сформировать отчет</string>
     <string name="text_view_password_text">Пароль: </string>
     <string name="text_view_password_login">Логин: </string>
     <string name="button_enter_text">Войти</string>
@@ -25,4 +25,6 @@
     <string name="text_view_customer">Покупатель: </string>
     <string name="text_view_medicine">Название лекарства: </string>
     <string name="text_view_count">Количество штук: </string>
+    <string name="button_date_from">Установить начальную дату</string>
+    <string name="button_date_to">Установить конечную дату</string>
 </resources>

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import com.example.coursework.R;
+import com.example.coursework.database.firebase.UserFirebaseLogic;
 import com.example.coursework.database.logics.UserLogic;
 import com.example.coursework.database.models.UserModel;
 import java.util.List;
@@ -19,6 +20,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText editTextLogin;
     EditText editTextPassword;
     UserLogic logic;
+    UserFirebaseLogic firebaseLogic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
         editTextPassword = findViewById(R.id.edit_text_password);
 
         logic = new UserLogic(this);
+        firebaseLogic = new UserFirebaseLogic();
 
         buttonRegister.setOnClickListener(
                 v -> {

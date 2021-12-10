@@ -38,6 +38,26 @@ public class ReceiptMedicinesLogic {
         db.close();
     }
 
+    public List<ReceiptMedicinesModel> getFullList() {
+        Cursor cursor = db.rawQuery("select * from " + TABLE, null);
+        List<ReceiptMedicinesModel> list = new ArrayList<>();
+        if (!cursor.moveToFirst()) {
+            return list;
+        }
+        do {
+            ReceiptMedicinesModel obj = new ReceiptMedicinesModel();
+
+            obj.setId(cursor.getInt((int) cursor.getColumnIndex(COLUMN_ID)));
+            obj.setReceiptid(cursor.getInt((int) cursor.getColumnIndex(COLUMN_RECEIPT_ID)));
+            obj.setMedicineid(cursor.getInt((int) cursor.getColumnIndex(COLUMN_MEDICINE_ID)));
+            obj.setCount(cursor.getInt((int) cursor.getColumnIndex(COLUMN_COUNT)));
+
+            list.add(obj);
+            cursor.moveToNext();
+        } while (!cursor.isAfterLast());
+        return list;
+    }
+
     public List<ReceiptMedicinesModel> getFilteredList(int receiptId) {
         Cursor cursor = db.rawQuery("select * from " + TABLE + " where "
                 + COLUMN_RECEIPT_ID + " = " + receiptId, null);
